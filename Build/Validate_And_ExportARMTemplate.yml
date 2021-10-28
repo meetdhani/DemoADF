@@ -19,7 +19,7 @@ steps:
 - task: Npm@1
   inputs:
     command: 'install'
-    workingDir: '$(Build.Repository.LocalPath)/<folder-of-the-package.json-file>' #replace with the package.json folder
+    workingDir: '$(Build.Repository.LocalPath)/Build' #replace with the package.json folder
     verbose: true
   displayName: 'Install npm package'
 
@@ -29,8 +29,8 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '$(Build.Repository.LocalPath)/<folder-of-the-package.json-file>' #replace with the package.json folder
-    customCommand: 'run build validate $(Build.Repository.LocalPath) /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/yourFactoryName'
+    workingDir: '$(Build.Repository.LocalPath)/Build' #replace with the package.json folder
+    customCommand: 'run build validate $(Build.Repository.LocalPath) /subscriptions/34d85bf0-d3c7-47ef-be5c-b7e4bd32cfeb/resourceGroups/Dev/providers/Microsoft.DataFactory/factories/dhaniadfdev'
   displayName: 'Validate'
 
 # Validate and then generate the ARM template into the destination folder, which is the same as selecting "Publish" from the UX.
@@ -39,14 +39,14 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    workingDir: '$(Build.Repository.LocalPath)/<folder-of-the-package.json-file>' #replace with the package.json folder
-    customCommand: 'run build export $(Build.Repository.LocalPath) /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/testResourceGroup/providers/Microsoft.DataFactory/factories/yourFactoryName "ArmTemplate"'
+    workingDir: '$(Build.Repository.LocalPath)/Build' #replace with the package.json folder
+    customCommand: 'run build export $(Build.Repository.LocalPath) /subscriptions/34d85bf0-d3c7-47ef-be5c-b7e4bd32cfeb/resourceGroups/Dev/providers/Microsoft.DataFactory/factories/dhaniadfdev "ArmTemplate"'
   displayName: 'Validate and Generate ARM template'
 
 # Publish the artifact to be used as a source for a release pipeline.
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.Repository.LocalPath)/<folder-of-the-package.json-file>/ArmTemplate' #replace with the package.json folder
+    targetPath: '$(Build.Repository.LocalPath)/Build/ArmTemplate' #replace with the package.json folder
     artifact: 'ArmTemplates'
     publishLocation: 'pipeline'
