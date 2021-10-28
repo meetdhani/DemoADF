@@ -1,0 +1,9 @@
+{
+	"name": "dhaniadfdev",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dbc0439b-88c1-4561-8c05-2d23df31ac3f",
+		"tenantId": "40c56628-8700-42ae-a8bb-746278a46cfa"
+	}
+}
